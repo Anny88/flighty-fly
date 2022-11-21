@@ -1,5 +1,7 @@
 import React from 'react';
-import { Card, CardContent, Skeleton } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Skeleton from "@mui/material/Skeleton";
 
 export const CardPlaceholder = () => {
     return (

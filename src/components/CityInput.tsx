@@ -13,10 +13,14 @@ export const CityInput = (props: CityInputProps) => {
 
     return (
         <Autocomplete
-            { ...otherProps}
+            autoComplete
+            autoSelect
+            clearOnEscape
+            selectOnFocus
             disablePortal
             renderInput={(params) => <TextField {...params} label={label} />}
             onChange={(e, val) => onChange(val as string)}
+            { ...otherProps}
         />
     );
 };

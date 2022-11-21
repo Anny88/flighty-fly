@@ -1,7 +1,6 @@
 import React from 'react';
-import { Grid } from "@mui/material";
-import { CardPlaceholder } from "./CardPlaceholder";
-import { OfferCard } from "./OfferCard";
+import Grid from "@mui/material/Grid";
+import { CardPlaceholder, OfferCard } from "../components";
 import { PriceOffer } from "../models";
 
 type OfferCardListProps = {

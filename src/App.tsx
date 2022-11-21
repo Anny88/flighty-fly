@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Box, Container, Grid } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import { CityInput, OfferCardList } from "./components";
 import { PriceOffer } from "./models";
 
-const inputOptions = ['DUS', 'FRA', 'ISS', 'DUB'];
+const inputOptions = ['ALA', 'DUS', 'FRA', 'ISS', 'DUB'];
 
 const initialResponse: PriceOffer[] = [];
 
@@ -25,7 +27,8 @@ function App() {
           .then((data) => {
               setResponse(data);
               setFilteredItems(data);
-              setTimeout(() => setLoading(false), 4000);
+              setLoading(false);
+              // setTimeout(() => setLoading(false), 4000);
           })
   }, []);
 
