@@ -1,102 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import { Box, Grid } from "@mui/material";
-import {CityInput} from "./components";
-import OfferCard from "./components/OfferCard";
+import { Box, Container, Grid } from "@mui/material";
+import { CityInput, OfferCardList } from "./components";
+import { PriceOffer } from "./models";
 
-const response = [
-    {
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    }, {
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    }, {
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'DUS',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'FRA',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'FRA',
-        destination: 'ALA',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },{
-        origin: 'FRA',
-        destination: 'AST',
-        departureDate: '2017-01-13',
-        returnDate: '2016-01-14',
-        price: '288$',
-        uuid: 'SA00003',
-    },
-];
 const inputOptions = ['DUS', 'FRA', 'ISS', 'DUB'];
+
+const initialResponse: PriceOffer[] = [];
 
 function App() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
+  const [response, setResponse] = useState(initialResponse);
   const [filteredItems, setFilteredItems] = useState(response);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      fetch("http://localhost:8080/price-offers", {
+          method: 'GET',
+          mode: "cors",
+          headers: {'Content-Type':'application/json'},
+      })
+          .then((res) => res.json())
+          .then((data) => {
+              setResponse(data);
+              setFilteredItems(data);
+              setTimeout(() => setLoading(false), 4000);
+          })
+  }, []);
 
   const handleOriginChange = (val: string) => {
       setOrigin(val);
@@ -110,42 +41,24 @@ function App() {
 
   return (
     <div className="App">
-        <Box mb={6} mt={6}>
-            <Grid container spacing={2} justifyContent="center">
-                <Grid item xs={12} md={6}>
-                    <CityInput id="origin" label="origin" options={inputOptions} value={origin} onChange={handleOriginChange} />
+        <Container maxWidth="md">
+            <Box mb={6} mt={6} width="100%" >
+                <Grid container spacing={2} justifyContent="center">
+                    <Grid item xs={12} md={6}>
+                        <CityInput id="origin" label="origin" options={inputOptions} value={origin} onChange={handleOriginChange} />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <CityInput id="destination" label="destination" options={inputOptions} value={destination} onChange={handleDestinationChange} />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <CityInput id="destination" label="destination" options={inputOptions} value={destination} onChange={handleDestinationChange} />
-                </Grid>
-            </Grid>
-        </Box>
+            </Box>
 
-        <Box mb={6}>
-            <Grid container spacing={2} justifyContent="center">
-                {filteredItems.map((resItem) =>
-                    <Grid item xs={12}>
-                        <OfferCard priceOffer={resItem} />
-                    </Grid>)}
-            </Grid>
-        </Box>
-
-
-
-
-      {/*<div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>*/}
+            <Box mb={6} width="100%">
+                <OfferCardList loading={loading} items={filteredItems} />
+            </Box>
+        </Container>
     </div>
   )
 }
 
-export default App
+export default App;

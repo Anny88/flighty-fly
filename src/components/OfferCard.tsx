@@ -1,14 +1,15 @@
 import React from 'react';
-import {Card, CardContent, Typography} from "@mui/material";
-import {PriceOffer} from "../models";
+import { Card, CardContent, Typography } from "@mui/material";
+import { PriceOffer } from "../models";
 
 export type OfferCardProps = {
     priceOffer: PriceOffer
 }
-const OfferCard = (props: OfferCardProps) => {
+
+export const OfferCard = (props: OfferCardProps) => {
     const { priceOffer } = props;
     return (
-        <Card variant="outlined">
+        <Card>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.primary">
                     {priceOffer.origin + ' ---> ' + priceOffer.destination}
@@ -23,5 +24,3 @@ const OfferCard = (props: OfferCardProps) => {
         </Card>
     );
 };
-
-export default OfferCard;
