@@ -12,8 +12,6 @@ function App() {
   const [origin, setOrigin] = useState<string | null>(null);
   const [destination, setDestination] = useState<string | null>(null);
 
-  console.log(destination);
-
   const filteredItems = useMemo(() =>
       filterPriceOffers(response, origin, destination),
       [response, origin, destination]);
