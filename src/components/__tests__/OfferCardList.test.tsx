@@ -26,8 +26,8 @@ describe("OfferCardList", () => {
         expect(screen.queryByTestId('card-placeholder')).toBeNull();
         expect(screen.getAllByText(/FRA/)).toHaveLength(2);
         expect(screen.getAllByText(/DUS/)).toHaveLength(1);
-        expect(screen.getAllByText('300')).toHaveLength(1);
-        expect(screen.getAllByText('1500')).toHaveLength(2);
+        expect(screen.getAllByText('200 EUR')).toHaveLength(3);
+        expect(screen.getAllByText(/21-03-2023/)).toHaveLength(2);
     });
 
 })
