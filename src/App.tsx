@@ -4,8 +4,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { AutocompleteInput, OfferCardList } from "./components";
 import { useFetchPriceOffers } from "./hooks";
-import {COUNTRY_CODES, filterPriceOffers} from "./utils";
-import './App.css'
+import { COUNTRY_CODES, filterPriceOffers } from "./utils";
+import './App.css';
 
 function App() {
   const { data: response, loading } = useFetchPriceOffers();
@@ -17,9 +17,9 @@ function App() {
       [response, origin, destination]);
 
   return (
-    <div className="App">
+    <Box className="App">
         <Container maxWidth="md">
-            <Box mb={6} mt={6} width="100%" >
+            <Box mb={6} mt={6} width="100%">
                 <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={12} md={6}>
                         <AutocompleteInput id="origin" label="origin" options={COUNTRY_CODES} value={origin} onChange={setOrigin} />
@@ -34,7 +34,7 @@ function App() {
                 <OfferCardList loading={loading} items={filteredItems} />
             </Box>
         </Container>
-    </div>
+    </Box>
   )
 }
 
