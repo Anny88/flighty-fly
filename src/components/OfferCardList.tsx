@@ -30,6 +30,16 @@ export const OfferCardList = (props: OfferCardListProps) => {
         );
     }
 
+    if (!items?.length) {
+        return (
+            <Grid container spacing={2} justifyContent="center">
+                <Grid item xs={12}>
+                    No offers found
+                </Grid>
+            </Grid>
+        )
+    }
+
     return (
         <Grid container spacing={2} justifyContent="center">
             {items?.map((resItem) =>

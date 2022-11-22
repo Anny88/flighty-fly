@@ -15,9 +15,9 @@ export const AutocompleteInput = (props: AutocompleteInputProps) => {
         <Autocomplete
             autoComplete
             autoSelect
+            disablePortal
             clearOnEscape
             selectOnFocus
-            disablePortal
             renderInput={(params) => <TextField {...params} label={label} />}
             onChange={(e, val) => onChange(val as string)}
             { ...otherProps}

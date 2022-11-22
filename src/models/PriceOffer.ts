@@ -3,6 +3,6 @@ export type PriceOffer = {
     destination: string,
     departureDate: string,
     returnDate: string,
-    price: string,
+    price: number,
     uuid: string
 }

@@ -5,7 +5,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 export const CardPlaceholder = () => {
     return (
-        <Card>
+        <Card data-testid="card-placeholder">
             <CardContent>
                 <Skeleton
                     animation="wave"
