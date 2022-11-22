@@ -3,7 +3,7 @@ import './App.css'
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { CityInput, OfferCardList } from "./components";
+import { AutocompleteInput, OfferCardList } from "./components";
 import { PriceOffer } from "./models";
 
 const inputOptions = ['ALA', 'DUS', 'FRA', 'ISS', 'DUB'];
@@ -48,10 +48,10 @@ function App() {
             <Box mb={6} mt={6} width="100%" >
                 <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={12} md={6}>
-                        <CityInput id="origin" label="origin" options={inputOptions} value={origin} onChange={handleOriginChange} />
+                        <AutocompleteInput id="origin" label="origin" options={inputOptions} value={origin} onChange={handleOriginChange} />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <CityInput id="destination" label="destination" options={inputOptions} value={destination} onChange={handleDestinationChange} />
+                        <AutocompleteInput id="destination" label="destination" options={inputOptions} value={destination} onChange={handleDestinationChange} />
                     </Grid>
                 </Grid>
             </Box>
