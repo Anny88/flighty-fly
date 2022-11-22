@@ -9,8 +9,10 @@ import './App.css';
 
 function App() {
   const { data: response, loading } = useFetchPriceOffers();
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
+  const [origin, setOrigin] = useState<string | null>(null);
+  const [destination, setDestination] = useState<string | null>(null);
+
+  console.log(destination);
 
   const filteredItems = useMemo(() =>
       filterPriceOffers(response, origin, destination),

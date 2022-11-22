@@ -6,7 +6,7 @@ import { PriceOffer } from "../models";
  * @param origin
  * @param destination
  */
-export const filterPriceOffers = (priceOffers: PriceOffer[] | undefined, origin: string, destination: string)
+export const filterPriceOffers = (priceOffers: PriceOffer[] | undefined, origin: string | null, destination: string | null)
     : PriceOffer[] | undefined => {
     if ((!origin && !destination) || !priceOffers) {
         return priceOffers;
