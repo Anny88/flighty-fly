@@ -1,52 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { AutocompleteInput, OfferCardList } from "./components";
-import { PriceOffer } from "./models";
+import { useFetchPriceOffers } from "./hooks";
 import { COUNTRY_CODES } from "./utils";
 
-const initialResponse: PriceOffer[] = [];
-function onlyUnique(value:any, index: any, self:any) {
-    return self.indexOf(value) === index;
-}
 function App() {
+  const { data: response, loading } = useFetchPriceOffers();
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [response, setResponse] = useState(initialResponse);
   const [filteredItems, setFilteredItems] = useState(response);
-  const [loading, setLoading] = useState(true);
 
-  const or = response.map((item) => item.origin);
-  const des = response.map((item) => item.origin);
-
-
-  console.log([...or, ...des].filter(onlyUnique).sort());
-
-  useEffect(() => {
-      fetch("http://localhost:8080/promotions/priceoffers/ond", {
-          method: 'GET',
-          mode: "cors",
-          headers: {'Content-Type':'application/json'},
-      })
-          .then((res) => res.json())
-          .then((data) => {
-              setResponse(data);
-              setFilteredItems(data);
-              setLoading(false);
-              // setTimeout(() => setLoading(false), 4000);
-          })
-  }, []);
-
+  console.log(response);
   const handleOriginChange = (val: string) => {
       setOrigin(val);
-      setFilteredItems(response.filter((item) => (item.origin === val || !val) && (item.destination === destination || !destination)));
+      setFilteredItems(response?.filter((item) => (item.origin === val || !val) && (item.destination === destination || !destination)));
   }
 
   const handleDestinationChange = (val: string) => {
       setDestination(val);
-      setFilteredItems(response.filter((item) => (item.origin === origin || !origin) && (item.destination === val || !val)));
+      setFilteredItems(response?.filter((item) => (item.origin === origin || !origin) && (item.destination === val || !val)));
   }
 
   return (
@@ -64,7 +39,7 @@ function App() {
             </Box>
 
             <Box mb={6} width="100%">
-                <OfferCardList loading={loading} items={filteredItems} />
+                <OfferCardList loading={loading} items={response} />
             </Box>
         </Container>
     </div>
