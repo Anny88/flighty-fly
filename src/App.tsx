@@ -18,7 +18,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      fetch("http://localhost:8080/price-offers", {
+      fetch("http://localhost:8080/promotions/priceoffers/ond", {
           method: 'GET',
           mode: "cors",
           headers: {'Content-Type':'application/json'},

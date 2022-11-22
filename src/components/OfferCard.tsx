@@ -20,7 +20,7 @@ export const OfferCard = (props: OfferCardProps) => {
                     {priceOffer.departureDate + ' ---> ' + priceOffer.returnDate}
                 </Typography>
                 <Typography variant="body2">
-                    {priceOffer.price}
+                    {`${priceOffer.price?.amount || ''} ${priceOffer.price?.currency}`}
                 </Typography>
             </CardContent>
         </Card>

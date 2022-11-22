@@ -17,9 +17,9 @@ describe("OfferCardList", () => {
 
     test("should show some offers", () => {
         const sampleOffers = [
-            { origin: 'DUS', destination: 'ALA', departureDate: '22-02-2023', returnDate: '28-02-2023', price: 300, uuid: '3err3d' },
-            { origin: 'FRA', destination: 'HND', departureDate: '21-03-2023', returnDate: '28-04-2023', price: 1500, uuid: '3456rr3d' },
-            { origin: 'PMI', destination: 'FRA', departureDate: '21-03-2023', returnDate: '28-04-2023', price: 1500, uuid: '3456rr3d' },
+            { origin: 'DUS', destination: 'ALA', departureDate: '22-02-2023', returnDate: '2023-07-03', price: { amount: 200, currency: 'EUR' }, seatAvailability: 4, uuid: '3err3d' },
+            { origin: 'FRA', destination: 'HND', departureDate: '21-03-2023', returnDate: '2023-28-04', price: { amount: 200, currency: 'EUR' }, seatAvailability: 4, uuid: '3456rr3d' },
+            { origin: 'PMI', destination: 'FRA', departureDate: '21-03-2023', returnDate: '2023-28-04',price: { amount: 200, currency: 'EUR' }, seatAvailability: 4, uuid: '3456rr3d' },
         ]
         render(<OfferCardList items={sampleOffers} />);
         expect(screen.queryByText(/No offers/)).toBeNull();
