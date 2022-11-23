@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { PriceOffer } from "../models";
 import Grid from "@mui/material/Grid";
+import {Divider} from "@mui/material";
 
 const getCurrencySign = (currency: string) => currency === "EUR" ? "€" : undefined;
 
@@ -25,11 +26,12 @@ export const OfferCard = (props: OfferCardProps) => {
                             {`${priceOffer.departureDate} ---> ${priceOffer.returnDate}`}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} md={4} pb={2} display="flex" flexDirection="column" justifyContent="center" >
+                    <Divider />
+                    <Grid item xs={12} md={4} p={2} display="flex" flexDirection="column" justifyContent="end" alignItems="center" >
                         <Typography variant="h6">
                             {`${priceOffer.price?.amount}${getCurrencySign(priceOffer.price?.currency)}`}
                         </Typography>
-                        <Typography variant="body2" color={priceOffer.seatAvailability && priceOffer.seatAvailability > 0 ? "text.secondary" : "error"}>
+                        <Typography variant="body2" color={priceOffer.seatAvailability && priceOffer.seatAvailability > 0 ? "success.main" : "text.secondary"}>
                             {`${priceOffer.seatAvailability || 'No'} seats available `}
                         </Typography>
                     </Grid>
